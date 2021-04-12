@@ -1,14 +1,18 @@
-package com.spacex.insights.demo.rspacex.gateway.entity;
+package com.spacex.insights.demo.api.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
 @Getter
+@Setter
+@Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Rocket {
+public class RocketData {
 
     @JsonProperty("id")
     String id;
@@ -17,19 +21,26 @@ public class Rocket {
     String name;
 
     @JsonProperty("height")
-    Height height;
+    Double height;
 
     @JsonProperty("mass")
-    Mass mass;
+    Double mass;
 
-    @JsonProperty("flickr_images")
+    @JsonProperty("images")
     List<String> images;
+
+    @JsonProperty("launches_successful")
+    int successfulLaunches;
+
+    @JsonProperty("failed_successful")
+    int failedLaunches;
 
     public Object[] toArray() {
         return new Object[]{getName(),
-                getHeight().getHeightInMeters(),
-                getMass().getMassInKg(),
+                getHeight(),
+                getMass(),
+                getSuccessfulLaunches(),
+                getFailedLaunches(),
                 getImages() == null ? "" : getImages().get(0)}; // taking only first url from images list in sake of pretty formatting
     }
-
 }

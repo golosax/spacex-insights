@@ -1,7 +1,7 @@
 package com.spacex.insights.demo.rspacex.controller;
 
-import com.spacex.insights.demo.rspacex.gateway.entity.Rocket;
-import com.spacex.insights.demo.rspacex.service.RocketService;
+import com.spacex.insights.demo.api.entity.RocketData;
+import com.spacex.insights.demo.rspacex.facade.RocketsFacade;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,10 +14,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RocketController {
 
-    private final RocketService rocketService;
+    private final RocketsFacade rocketsFacade;
 
     @GetMapping(value = "/rockets")
-    public List<Rocket> getRockets() {
-        return rocketService.getRockets();
+    public List<RocketData> loadRocketsData() {
+        return rocketsFacade.getRocketsData();
     }
 }

@@ -1,7 +1,7 @@
 package com.spacex.insights.demo.tools;
 
-import com.spacex.insights.demo.rspacex.gateway.entity.Rocket;
-import com.spacex.insights.demo.rspacex.service.RocketService;
+import com.spacex.insights.demo.api.entity.RocketData;
+import com.spacex.insights.demo.rspacex.facade.RocketsFacade;
 import dnl.utils.text.table.TextTable;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -17,24 +17,26 @@ import java.util.List;
 @AllArgsConstructor
 public class CommandLineInteractor implements CommandLineRunner {
 
-    private RocketService rocketService;
+    private RocketsFacade rocketsFacade;
 
     private static final String CONSOLE_PARAMETER = "--print_to_console";
 
     @Override
     public void run(String... args) throws Exception {
         if (isRunForConsole(args)) {
-            printRocketsTableToConsole(rocketService.getRockets());
+            printRocketsTableToConsole(rocketsFacade.getRocketsData());
         }
     }
 
-    private void printRocketsTableToConsole(List<Rocket> rockets) {
+    private void printRocketsTableToConsole(List<RocketData> rocketData) {
         String[] columnNames = {"Name",
                 "Height (m)",
                 "Mass (kg)",
+                "Successfully launched ",
+                "Failed",
                 "Image"};
 
-        TableModel jTable = new DefaultTableModel(transformToDoubleArray(rockets), columnNames);
+        TableModel jTable = new DefaultTableModel(transformToDoubleArray(rocketData), columnNames);
 
         TextTable textTable = new TextTable(jTable, true);
         textTable.printTable();
@@ -44,14 +46,14 @@ public class CommandLineInteractor implements CommandLineRunner {
         return Arrays.asList(args).contains(CONSOLE_PARAMETER);
     }
 
-    private Object[][] transformToDoubleArray(List<Rocket> rockets) {
-        if(rockets == null || rockets.size() == 0) {
+    private Object[][] transformToDoubleArray(List<RocketData> rocketData) {
+        if (rocketData == null || rocketData.isEmpty()) {
             return new Object[][]{};
         }
-        Object[][] array = new Object[rockets.size()][rockets.get(0).toArray().length];
+        Object[][] array = new Object[rocketData.size()][rocketData.get(0).toArray().length];
 
-        for (int i = 0; i < rockets.size(); i++) {
-            array[i] = rockets.get(i).toArray();
+        for (int i = 0; i < rocketData.size(); i++) {
+            array[i] = rocketData.get(i).toArray();
         }
 
         return array;

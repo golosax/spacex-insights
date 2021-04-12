@@ -27,13 +27,16 @@ class RocketList extends Component {
         const rocketList = rockets.map(rocket => {
             return <tr>
                 <td style={{whiteSpace: 'nowrap'}}>{rocket.name}</td>
-                <td>{rocket.height.meters} m</td>
-                <td>{rocket.mass.kg} kg</td>
+                <td>{rocket.height} m</td>
+                <td>{rocket.mass} kg</td>
+                <td>{rocket.launches_successful}</td>
+                <td>{rocket.failed_successful}</td>
                 <td>
                     <div className="row">
-                        {rocket.flickr_images.map(image => (
+                        {rocket.images.map(image => (
                             <div id="image_preview" class="column">
-                                <a href={image} rel="noopener noreferrer" target="_blank"> <img alt={rocket.name} src={image}/> </a>
+                                <a href={image} rel="noopener noreferrer" target="_blank"> <img alt={rocket.name}
+                                                                                                src={image}/> </a>
                             </div>
                         ))}
                     </div>
@@ -50,6 +53,8 @@ class RocketList extends Component {
                             <th width="10%">Name</th>
                             <th width="10%">Height</th>
                             <th width="10%">Mass</th>
+                            <th width="10%">Launch success</th>
+                            <th width="10%">Launch failed</th>
                             <th width="30%">Images</th>
                         </tr>
                         </thead>
