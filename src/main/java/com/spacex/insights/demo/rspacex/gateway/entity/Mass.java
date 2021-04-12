@@ -9,5 +9,5 @@ import lombok.Getter;
 public class Mass {
 
     @JsonProperty("kg")
-    Double kg;
+    Double massInKg;
 }

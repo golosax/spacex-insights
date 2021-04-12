@@ -9,5 +9,5 @@ import lombok.Getter;
 public class Height {
 
     @JsonProperty("meters")
-    Double meters;
+    Double heightInMeters;
 }

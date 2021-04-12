@@ -21,4 +21,12 @@ public class Rocket {
 
     @JsonProperty("flickr_images")
     List<String> images;
+
+    public Object[] toArray() {
+        return new Object[]{getName(),
+                getHeight().getHeightInMeters(),
+                getMass().getMassInKg(),
+                getImages() == null ? "" : getImages().get(0)}; // taking only first url from images list in sake of pretty formatting
+    }
+
 }

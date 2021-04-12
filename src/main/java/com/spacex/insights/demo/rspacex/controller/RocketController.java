@@ -17,7 +17,7 @@ public class RocketController {
     private final RocketService rocketService;
 
     @GetMapping(value = "/rockets")
-    public List<Rocket> start() {
+    public List<Rocket> getRockets() {
         return rocketService.getRockets();
     }
 }
