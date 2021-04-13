@@ -2,6 +2,8 @@ package com.spacex.insights.demo.tools;
 
 import com.spacex.insights.demo.api.entity.RocketData;
 import com.spacex.insights.demo.rspacex.facade.RocketsFacade;
+import com.spacex.insights.demo.rspacex.gateway.entity.Rocket;
+import com.spacex.insights.demo.rspacex.service.RocketService;
 import dnl.utils.text.table.TextTable;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -28,6 +30,23 @@ public class CommandLineInteractor implements CommandLineRunner {
         }
     }
 
+    Object[][] transformToDoubleArray(List<RocketData> rocketData) {
+        if(rocketData == null || rocketData.isEmpty()) {
+            return new Object[][]{};
+        }
+        Object[][] array = new Object[rocketData.size()][rocketData.get(0).toArray().length];
+
+        for (int i = 0; i < rocketData.size(); i++) {
+            array[i] = rocketData.get(i).toArray();
+        }
+
+        return array;
+    }
+
+    private static boolean isRunForConsole(String[] args) {
+        return Arrays.asList(args).contains(CONSOLE_PARAMETER);
+    }
+
     private void printRocketsTableToConsole(List<RocketData> rocketData) {
         String[] columnNames = {"Name",
                 "Height (m)",
@@ -40,23 +59,6 @@ public class CommandLineInteractor implements CommandLineRunner {
 
         TextTable textTable = new TextTable(jTable, true);
         textTable.printTable();
-    }
-
-    private static boolean isRunForConsole(String[] args) {
-        return Arrays.asList(args).contains(CONSOLE_PARAMETER);
-    }
-
-    private Object[][] transformToDoubleArray(List<RocketData> rocketData) {
-        if (rocketData == null || rocketData.isEmpty()) {
-            return new Object[][]{};
-        }
-        Object[][] array = new Object[rocketData.size()][rocketData.get(0).toArray().length];
-
-        for (int i = 0; i < rocketData.size(); i++) {
-            array[i] = rocketData.get(i).toArray();
-        }
-
-        return array;
     }
 
 }

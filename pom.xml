@@ -14,7 +14,7 @@
 	<name>spacex-insights</name>
 	<description>Demo project for spaceX insights</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>15</java.version>
 		<lombok.version>1.18.20</lombok.version>
 	</properties>
 	<dependencies>

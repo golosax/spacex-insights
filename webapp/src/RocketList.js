@@ -53,7 +53,7 @@ class RocketList extends Component {
                             <th width="10%">Name</th>
                             <th width="10%">Height</th>
                             <th width="10%">Mass</th>
-                            <th width="10%">Launch success</th>
+                            <th width="10%">Launched successfully</th>
                             <th width="10%">Launch failed</th>
                             <th width="30%">Images</th>
                         </tr>

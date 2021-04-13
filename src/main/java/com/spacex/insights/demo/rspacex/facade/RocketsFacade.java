@@ -26,7 +26,7 @@ public class RocketsFacade {
         List<Rocket> rockets = rocketService.getRockets();
         List<Launch> launches = launchesService.getPastLaunches();
 
-        List<RocketData> rocketDataList = createRocketDataBasicInfo(rockets);
+        List<RocketData> rocketDataList = convertRocketsPayloadToRocketData(rockets);
 
         for (Launch launch : launches) {
             for (RocketData rocketData : rocketDataList) {
@@ -43,15 +43,15 @@ public class RocketsFacade {
         return rocketDataList;
     }
 
-    private List<RocketData> createRocketDataBasicInfo(List<Rocket> rockets) {
+    List<RocketData> convertRocketsPayloadToRocketData(List<Rocket> rockets) {
         List<RocketData> rocketDataList = new ArrayList<>();
 
         for (Rocket rocket : rockets) {
             RocketData rocketData = RocketData.builder()
                     .id(rocket.getId())
                     .name(rocket.getName())
-                    .height(rocket.getHeight() == null ? 0.0 : rocket.getHeight().getHeightInMeters())
-                    .mass(rocket.getMass() == null ? 0.0 : rocket.getMass().getMassInKg())
+                    .height(rocket.getHeight() == null ? null : rocket.getHeight().getHeightInMeters())
+                    .mass(rocket.getMass() == null ? null : rocket.getMass().getMassInKg())
                     .images(rocket.getImages())
                     .build();
             rocketDataList.add(rocketData);
