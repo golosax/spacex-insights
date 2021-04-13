@@ -11,7 +11,15 @@
     "react-scripts": "2.1.0",
     "reactstrap": "6.5.0",
     "react-dropdown": "^1.6.4",
-    "react-confirm-alert": "^2.6.1"
+    "react-confirm-alert": "^2.6.1",
+    "jest": {
+      "automock": false,
+      "setupFiles": [
+        "./setupJest.js"
+      ]
+    },
+    "@testing-library/jest-dom": "^5.11.6",
+    "@testing-library/react": "^11.2.6"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -28,5 +36,9 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "@testing-library/dom": "^7.30.3",
+    "jest-fetch-mock": "^3.0.3"
+  }
 }
